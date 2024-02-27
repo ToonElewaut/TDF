@@ -69,18 +69,50 @@ def cycling_power_profile(slope, weight, velocity, profile):
     Returns:
     float: Adjusted cycling power based on the stage profile (in Watts).
     """
+    # Modifiers found in Compare_calculations:
+    # [([0.5, 0.5], [1.0, 1.0]), ([0.5, 1.0], [0.5, 1.0]), ([1.5, 1.5], [0.5, 0.5])]
     if profile == 'p1': # Flat
-        return cycling_power(slope, weight, velocity)
+        return np.mean((cycling_power(slope * 0.5, weight, velocity * 1),
+                        cycling_power(slope * 0.5, weight, velocity * 1)))
     if profile == 'p2': # Hills, flat finish
-        return np.mean((cycling_power(slope, weight, velocity * 0.75),
-                        cycling_power(0, weight, velocity)))
+        return np.mean((cycling_power(slope * 0.5, weight, velocity * 1),
+                        cycling_power(slope * 1, weight, velocity * 1)))
     if profile == 'p3': # Hills, uphill finish
-        return np.mean((cycling_power(slope, weight, velocity * 0.75),
-                        cycling_power(0, weight, velocity * 1)))
+        return np.mean((cycling_power(slope * 0.5, weight, velocity * 1),
+                        cycling_power(slope * 1, weight, velocity * 1)))
     if profile == 'p4': # Mountains, flat finish
-        return np.mean((cycling_power(slope*4, weight, velocity * 0.66),
-                        cycling_power(0, weight, velocity)))
+        return np.mean((cycling_power(slope * 1.5, weight, velocity * 0.5),
+                        cycling_power(slope * 1.5, weight, velocity * 0.5)))
     if profile == 'p5': # Mountains, uphill finish
-        return np.mean((cycling_power(slope*4, weight, velocity * 0.75),
-                        cycling_power(0, weight, velocity)))
+        return np.mean((cycling_power(slope * 1.5, weight, velocity * 0.5),
+                        cycling_power(slope * 1.5, weight, velocity * 0.5)))
+
+def cycling_power_profile_mods(slope, weight, velocity, profile, slope_modifiers, velocity_modifiers):
+    """
+    Adjusts cycling power based on the stage profile.
+
+    Args:
+    slope (float): Slope of the road (in percentage).
+    weight (float): Total weight of the cyclist and the bicycle (in KG).
+    velocity (float): Velocity of the cyclist (in meters per second).
+    profile (str): Stage profile identifier ('p1' to 'p5').
+
+    Returns:
+    float: Adjusted cycling power based on the stage profile (in Watts).
+    """
+    if profile == 'p1': # Flat
+        return np.mean((cycling_power(slope * slope_modifiers[0], weight, velocity * velocity_modifiers[0]),
+                        cycling_power(slope * slope_modifiers[1], weight, velocity * velocity_modifiers[1])))
+    if profile == 'p2': # Hills, flat finish
+        return np.mean((cycling_power(slope * slope_modifiers[0], weight, velocity * velocity_modifiers[0]),
+                        cycling_power(slope * slope_modifiers[1], weight, velocity * velocity_modifiers[1])))
+    if profile == 'p3': # Hills, uphill finish
+        return np.mean((cycling_power(slope * slope_modifiers[0], weight, velocity * velocity_modifiers[0]),
+                        cycling_power(slope * slope_modifiers[1], weight, velocity)))
+    if profile == 'p4': # Mountains, flat finish
+        return np.mean((cycling_power(slope * slope_modifiers[0], weight, velocity * velocity_modifiers[0]),
+                        cycling_power(slope * slope_modifiers[1], weight, velocity)))
+    if profile == 'p5': # Mountains, uphill finish
+        return np.mean((cycling_power(slope * slope_modifiers[0], weight, velocity * velocity_modifiers[0]),
+                        cycling_power(slope * slope_modifiers[1], weight, velocity)))
     
