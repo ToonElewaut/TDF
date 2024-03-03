@@ -1,2 +1,6 @@
 /TDF.conda
 keys.py
+__pycache__/keys.cpython-310.pyc
+src/__pycache__/data_helper.cpython-310.pyc
+src/__pycache__/power_helper.cpython-310.pyc
+src/__pycache__/visuals_helper.cpython-310.pyc

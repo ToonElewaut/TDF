@@ -1,0 +1,7 @@
+dash==2.15.0
+pandas==2.1.4
+pyworkout-toolkit
+numpy==1.23.5
+gpxpy==1.6.2
+plotly==5.18.0
+procyclingstats==0.1.8
