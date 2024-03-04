@@ -8,6 +8,8 @@ This GitHub repository contains an analysis of historic Tour de France stages, a
 
 The dataset used for this analysis includes historical information about Tour de France stages, including details such as elevation, slope, distance, and rider performance. The data is organized to facilitate exploration and analysis of different aspects of the stages.
 
+For stages since 2020, additional route and power information has been incorporated into the dataset, provided through GPX (GPS Exchange Format) and TCX (Training Center XML) files. GPX files allow the actual profile and route to be displayed instead of estimations based on departure/arrival locations and elevation gain. TCX files allow the actual power of the rider to be overlayed on the route map and profile graph.
+
 ## Power Calculation
 
 To estimate the power requirements for cyclists during Tour de France stages, a formule from [omnicalculator](https://www.omnicalculator.com/sports/cycling-wattage) is used. These formula take into account gravitational force, rolling resistance, aerodynamic drag, and stage profile. The power calculations are a VERY rough estimate for the power required for the GC rider of each year (or someone with similar weight) to complete each stage. These calculations dont take drafting into account and don't have the exact profile of each stage, the calculations for each type of stage can be found in [power_helper](power_helper.py).
