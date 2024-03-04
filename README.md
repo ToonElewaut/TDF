@@ -14,6 +14,15 @@ For stages since 2020, additional route and power information has been incorpora
 
 To estimate the power requirements for cyclists during Tour de France stages, a formule from [omnicalculator](https://www.omnicalculator.com/sports/cycling-wattage) is used. These formula take into account gravitational force, rolling resistance, aerodynamic drag, and stage profile. The power calculations are a VERY rough estimate for the power required for the GC rider of each year (or someone with similar weight) to complete each stage. These calculations dont take drafting into account and don't have the exact profile of each stage, the calculations for each type of stage can be found in [power_helper](power_helper.py).
 
+## Examples
+### GPX
+![gpx](assets/gpx.png "GPX")
+### TCX
+![TCX](assets/tcx.png "TCX")
+### estimated
+![estimated](assets/estimated.png "estimated")
+
+
 ## Usage
 
 ### Option 1: Build Docker Container
